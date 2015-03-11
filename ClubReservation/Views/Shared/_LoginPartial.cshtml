@@ -1,0 +1,154 @@
+﻿@using ClubReservation.Helpers;
+@if (Request.IsAuthenticated)
+{
+    var user = new CurrentUser().User;
+    PageHelper ph = new PageHelper();
+    if (user.RoleId == MasterData.RoleCM || user.RoleId == MasterData.RoleAU)
+    {
+        if (user.RoleId == MasterData.RoleCM)
+        {
+            var clubs = ph.GetExamineByUser(user);
+            <li class="purple">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-bell-alt icon-animated-bell icon-only"></i>
+                    <span class="badge badge-important">@(clubs.Count)</span>
+                </a>
+                @if (clubs != null)
+                {
+                    <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-closer">
+                        <li class="nav-header">
+                            <i class="icon-bell-alt"></i>申请信息
+                        </li>
+                        @foreach (var item in clubs)
+                        {
+                            int count = item.Examines.Count(e => e.State == MasterData.ExamineUD);
+                            if (count > 0)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Examine", "Club", new { id = item.Id })">
+                                        <div class="clearfix">
+                                            <span class="pull-left">@(item.ClubName)</span>
+                                            <span class="pull-right badge badge-info">@(count)</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        <li>
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                    </ul>
+                }
+            </li>
+        }
+        var activities = ph.GetActivityByUser(user);
+        <li class="green">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-envelope-alt icon-animated-vertical icon-only"></i>
+                <span class="badge badge-success">@(activities.Count)</span>
+            </a>
+            @if (activities != null)
+            {
+                <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
+                    <li class="nav-header">
+                        <i class="icon-envelope"></i>活动提醒
+                    </li>
+                    @foreach (var item in activities)
+                    {
+                        <li>
+                            <a href="@Url.Action("Index","UserZone")">
+                                <span class="msg-body">
+                                    <span class="msg-title">
+                                        @(item.ActivityName)
+                                    </span>
+                                    <span class="msg-time">
+                                        <i class="icon-time"></i>
+                                        <span>@(item.StartTime.ToString("yyyy-MM-dd hh:mm"))</span>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                    }
+                    <li>
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                </ul>
+            }
+        </li>
+        var examines = ph.GetUserExamine(user);
+        <li>
+            <a href="@(Url.Action("ExamineDelete","Club"))" id="delete-user-examines" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-tasks"></i>
+                <span class="badge badge-success">@(examines.Count)</span>
+            </a>
+            @if (examines != null)
+            {
+                <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
+                    <li class="nav-header">
+                        <i class="icon-tasks"></i>申请提醒
+                    </li>
+                    @foreach (var item in examines)
+                    {
+                        if (item.State == MasterData.ExamineNP)
+                        {
+                            <li>
+                                <a href="javascript:void(0);">
+
+                                    <div class="clearfix">
+                                        <span class="pull-left">
+                                            <i class="icon-remove red"></i>&nbsp;
+                                            申请加入<span class="blue">@(item.Club.ClubName)</span>失败
+                                        </span>
+                                    </div>
+
+                                </a>
+                            </li>
+                        }
+                        else if (item.State == MasterData.ExaminePA)
+                        {
+                            <li>
+                                <a href="javascript:void(0);">
+
+                                    <div class="clearfix">
+                                        <span class="pull-left">
+                                            <i class="icon-ok green"></i>&nbsp;
+                                            申请加入<span class="blue">@(item.Club.ClubName)</span>成功
+                                        </span>
+                                    </div>
+
+                                </a>
+                            </li>
+                        }
+                    }
+                    <li>
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                </ul>
+            }
+        </li>
+
+    }
+    <ul class="nav ace-nav pull-right">
+        <li class="light-blue user-profile">
+            <a class="user-menu dropdown-toggle" href="#" data-toggle="dropdown">
+                <img alt="@user.Name" src="@Url.Content("~/Images/head.jpg")" class="nav-user-photo" />
+                <span id="user_info">
+                    <small>欢迎,</small> @user.Name
+                </span>
+                <i class="icon-caret-down"></i>
+            </a>
+            <ul id="user_menu" class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
+                @if (user.RoleId == MasterData.RoleSA)
+                {
+                    <li><a href="@Url.Action("SuperZone", "UserZone", new { id=user.Id})"><i class="icon-user"></i> 个人中心</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Index","UserZone")"><i class="icon-user"></i> 个人中心</a></li>
+                }
+                <li class="divider"></li>
+                <li><a href="@Url.Action("LoginOut","User")"><i class="icon-off"></i> 注销</a></li>
+            </ul>
+        </li>
+    </ul>
+}

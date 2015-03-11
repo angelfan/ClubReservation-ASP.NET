@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ClubReservation.Models.Activity>
+
+@{
+    ViewBag.Title = "活动一览";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/pagejs/activity.js")"></script>
+}
+
+<div class="page-header position-relative">
+    <h1>活动管理<small><i class="icon-double-angle-right"></i>活动一览</small></h1>
+</div><!--/page-header-->
+
+<div class="row-fluid">
+    <!-- 操作后的信息弹出层 -->
+    <!-- PAGE CONTENT BEGINS HERE -->
+    <div class="row-fluid" id="div-alert-message">
+    </div>
+    <div class="space-6"></div>
+</div>
+<div class="row-fluid">
+    <div class="table-header">
+        <i class="icon-user"></i>&nbsp;&nbsp;活动一览
+    </div>
+    <div id="div-table-activity">
+        @Html.Partial("~/Views/Activity/_ActivityTable.cshtml", Model)
+    </div>
+   
+</div>
+<!-- 皮肤设置-->
+<div id="ace-settings-container">
+    <!--#breadcrumbs皮肤的设置-->
+    @Html.Partial("~/Views/Shared/_PageSkin.cshtml")
+</div>

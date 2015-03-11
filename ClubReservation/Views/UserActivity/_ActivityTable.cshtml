@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ClubReservation.Models.Activity>
+@{ int i = 1; }
+@foreach (var item in Model)
+{
+    <tr>
+        <td class='center'>@(i++)</td>
+        <td><a href="@Url.Action("Details", "Activity", new { id = item.Id })">@Html.DisplayFor(modelItem => item.ActivityName)</a></td>
+        <td>@Html.DisplayFor(modelItem => item.ActivityPlace)</td>
+        <td>@item.StartTime.ToString("yyyy-MM-dd hh:mm:ss")</td>
+        <td>@item.EndTime.ToString("yyyy-MM-dd hh:mm:ss")</td>
+        <td><a href="@Url.Action("Details", "Activity")">@Html.DisplayFor(modelItem => item.Club.ClubName)</a></td>
+        <td>@Html.DisplayFor(modelItem => item.MinNumber)</td>
+        <td>@Html.DisplayFor(modelItem => item.MaxNumber)</td>
+        <td>@Html.DisplayFor(modelItem => item.EnrollNo)</td>
+        <td class="center">
+            @{
+              if (item.EnrollEndTime < @ViewBag.TimeNow)
+              {
+                <button class='btn btn-mini btn-grey'><i class='icon-circle'></i>&nbsp;报名截止</button>
+              }
+              else if ((item.EnrollNo > item.MaxNumber) || item.EnrollNo == item.MaxNumber) 
+              { 
+                  <button class='btn btn-mini btn-grey' ><i class='icon-circle'></i>&nbsp;人数已满</button>
+              }  
+              else if (item.EnrollNo < item.MaxNumber)
+              {
+                 <a href="@Url.Action("Enroll", new { id=item.Id})" id="Enroll" class='btn btn-mini btn-success'><i class='icon-ok'></i>&nbsp;报名参加</a>
+              }   
+            }
+        </td>
+    </tr>
+}

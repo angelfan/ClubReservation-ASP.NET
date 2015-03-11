@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ClubReservation.Models.Activity>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header position-relative">
+    <h1>活动报名<small></small></h1>
+</div><!--/page-header-->
+<div class="row-fluid">
+    <!-- 操作提示弹出提醒 -->
+    <!-- PAGE CONTENT BEGINS HERE -->
+    @if (TempData["messages"] != null)
+    {
+        <div id="messageBoxOk" class="alert alert-block alert-error">
+            <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+            <i class="icon-remove red"></i>
+            <span>@TempData["messages"]</span>
+        </div>
+    }
+    <div class="space-6"></div>
+</div>
+
+<!--/page-header 这里增加内容-->
+<div class="row-fluid">
+    <div class="table-header">
+        <i class="icon-coffee"></i>&nbsp;&nbsp;可报名的活动
+    </div>
+    <table id="table_report" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="center">序号</th>
+                <th>活动名</th>
+                <th>活动地点</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>举办方</th>
+                <th>人数下限</th>
+                <th>人数上限</th>
+                <th>已报名人数</th>
+                <th class="center">操作</th>
+            </tr>
+        </thead>
+        <tbody id="table_report_tbody">
+            @Html.Partial("~/Views/UserActivity/_ActivityTable.cshtml", Model)
+        </tbody>
+    </table>
+</div>
+
+<!-- 皮肤设置-->
+<div id="ace-settings-container">
+    <!--#breadcrumbs皮肤的设置-->
+    @Html.Partial("~/Views/Shared/_PageSkin.cshtml")
+</div>
+

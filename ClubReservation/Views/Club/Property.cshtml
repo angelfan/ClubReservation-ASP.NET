@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ClubReservation.Models.Property>
+@{
+    ViewBag.Title = "资产一览";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var club = ViewBag.Club;
+}
+@section styles {
+    <!--自定义样式-->
+    <link href="@Url.Content("~/Content/pagecss/club.css")" rel="stylesheet" />
+}
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/pagejs/club.js")"></script>
+}
+<div class="page-header position-relative">
+    <h1>俱乐部管理<small><i class="icon-double-angle-right"></i>@(club.ClubName)&nbsp;&nbsp;资产一览</small></h1>
+</div><!--/page-header-->
+
+<!-- 操作后的信息弹出层 -->
+<div class="row-fluid" id="div-alert-message">
+    <!-- PAGE CONTENT BEGINS HERE -->
+</div>
+<div class="row-fluid">
+    <div class="block pull-right" style="margin-bottom:10px;">
+        <a href="@Url.Action("PropertyCreate", "Club", new { id=club.Id})" class="btn btn-small btn-info"><i class="icon-ok"></i> 添加</a>
+        &nbsp; &nbsp;
+        <a href="@Url.Action("Index", "Club", new { id = club.Id })" class="btn btn-small btn-light"><i class="icon-arrow-left"></i> 返回</a>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="table-header">
+        <i class="icon-user"></i>&nbsp;&nbsp;@(club.ClubName)&nbsp;&nbsp;资产一览
+    </div>
+    <div id="div-table-property">
+        @Html.Partial("~/Views/Club/_PropertyTable.cshtml", Model)
+    </div>
+</div>
+
+<div id="ace-settings-container">
+    <!--#breadcrumbs皮肤的设置-->
+    @Html.Partial("~/Views/Shared/_PageSkin.cshtml")
+</div><!--/#ace-settings-container-->

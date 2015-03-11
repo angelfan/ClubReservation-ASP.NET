@@ -1,0 +1,84 @@
+﻿@using ClubReservation.Helpers
+@{
+    var user = new CurrentUser().User;
+}
+<div id="sidebar-shortcuts">
+    <div id="sidebar-shortcuts-large">
+    </div>
+</div><!-- #可加入内容 -->
+<ul class="nav nav-list">
+    <li id="home" class="active">
+        <a href="@Url.Action("Home", "User")">
+            <i class="icon-home"></i>
+            <span>首页</span>
+        </a>
+    </li>
+    @if(user.RoleId==MasterData.RoleSA||user.RoleId==MasterData.RoleCM){
+    <li id="user">
+        <a href="#" class="dropdown-toggle">
+            <i class="icon-user">
+            </i>
+            <span>用户管理</span>
+            <b class="arrow icon-angle-down"></b>
+        </a>
+        <ul class="submenu">
+            <li><a href="@Url.Action("Index","User")"><i class="icon-double-angle-right"></i>用户一览</a></li>
+            <li><a href="@Url.Action("Create","User")"><i class="icon-double-angle-right"></i>用户新建</a></li>
+            @if (user.RoleId == MasterData.RoleSA)
+            {
+                <li><a href="@Url.Action("Input","User")"><i class="icon-double-angle-right"></i>用户导入</a></li>
+            }
+        </ul>
+    </li>
+    }
+    <li id="club">
+        <a href="#" class="dropdown-toggle">
+            <i class="icon-dashboard">
+            </i>
+            <span>俱乐部管理</span>
+            <b class="arrow icon-angle-down"></b>
+        </a>
+        <ul class="submenu">
+            <li><a href="@Url.Action("Index","Club")"><i class="icon-double-angle-right"></i>俱乐部一览</a></li>
+            @if (user.RoleId == MasterData.RoleSA)
+            { 
+            <li><a href="@Url.Action("Create","Club")"><i class="icon-double-angle-right"></i>俱乐部新建</a></li>
+            }
+        </ul>
+    </li>
+    @if (user.RoleId == MasterData.RoleCM) { 
+    <li id="activity">
+        <a href="#" class="dropdown-toggle">
+            <i class="icon-coffee"></i>
+            <span>活动管理</span>
+            <b class="arrow icon-angle-down"></b>
+        </a>
+        <ul id="activity" class="submenu">
+            <li><a href="@Url.Action("Index","Activity")"><i class="icon-double-angle-right"></i> 活动一览</a></li>
+            <li><a href="@Url.Action("Create", "Activity")"><i class="icon-double-angle-right"></i>活动新建</a></li>
+        </ul>
+    </li>
+    }
+    @if (user.RoleId == MasterData.RoleAU || user.RoleId == MasterData.RoleCM) { 
+    <li id="user-activity">
+        <a href="@Url.Action("Index", "UserActivity")">
+            <i class="icon-bookmark"></i>
+            <span>活动报名</span>
+        </a>
+    </li>
+    }
+    @if (user.RoleId == MasterData.RoleSA || user.RoleId == MasterData.RoleCM) { 
+    <li id="statistic">
+        <a href="#" class="dropdown-toggle">
+            <i class="icon-list-alt"></i>
+            <span>数据统计</span>
+            <b class="arrow icon-angle-down"></b>
+        </a>
+        <ul class="submenu">
+            <li><a href="@Url.Action("Clubs", "Statistics")"><i class="icon-double-angle-right"></i>俱乐部信息统计</a></li>
+            <li><a href="@Url.Action("Users", "Statistics")"><i class="icon-double-angle-right"></i>用户信息统计</a></li>
+        </ul>
+    </li>
+    }
+</ul><!--/.nav-list-->
+<div id="sidebar-collapse"><i class="icon-double-angle-left"></i></div><!--/#sidebar的隐藏和显示-->

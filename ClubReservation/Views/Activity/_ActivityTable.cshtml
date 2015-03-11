@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ClubReservation.Models.Activity>
+@{ int i = 1; }
+<table id="table_report" class="table table-striped table-bordered table-hover">
+
+    <thead>
+        <tr>
+            <th class="center">序号</th>
+            <th>@Html.DisplayNameFor(model => model.ActivityName)</th>
+            <th>@Html.DisplayNameFor(model => model.ActivityPlace)</th>
+            <th>@Html.DisplayNameFor(model => model.StartTime)</th>
+            <th>@Html.DisplayNameFor(model => model.EndTime)</th>
+            <th>@Html.DisplayNameFor(model => model.EnrollEndTime)</th>
+            <th>@Html.DisplayNameFor(model => model.EnrollNo)</th>
+            <th>@Html.DisplayNameFor(model => model.MinNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.MaxNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.State)</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+    <tbody id="table_report_tbody">
+        @if (@ViewBag.activities != null)
+        { 
+           foreach (var item in @ViewBag.activities)
+            {
+            <tr>
+                <td class='center'>@(i++)</td>
+                <td>@item.ActivityName</td>
+                <td>@item.ActivityPlace</td>
+                <td>@item.StartTime</td>
+                <td>@item.EndTime</td>
+                <td>@item.EnrollEndTime</td>
+                <td>@item.EnrollNo</td>
+                <td>@item.MinNumber</td>
+                <td>@item.MaxNumber</td>
+
+                <td>
+                    @if (@item.State == 0)
+                    {
+                        <text>未过期</text>
+                    }
+                    else if (@item.State == 1)
+                    {
+                        <text>已过期</text>
+                    }
+                </td>
+                <td class="center">
+                    <div class="inline position-relative">
+                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-only"></i>&nbsp;选择</button>
+                        <ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
+                            <li><a href="@Url.Action("Details", new { id = item.Id })" class="tooltip-warning" data-rel="tooltip" title="详细" data-placement="left"><span class="blue"><i class="icon-user-md"></i></span>详细</a></li>
+                            <li><a href="@Url.Action("Edit", new { id = item.Id })" class="tooltip-success" data-rel="tooltip" title="编辑" data-placement="left"><span class="green"><i class="icon-edit"></i></span>编辑</a></li>
+                            <li><a href="@Url.Action("Delete", "Activity")" value="@item.Id" class="tooltip-error delete-activity" data-rel="tooltip" title="删除" data-placement="left"><span class="red"><i class="icon-trash"></i></span>删除</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            }
+    
+        }
+    </tbody>
+</table>

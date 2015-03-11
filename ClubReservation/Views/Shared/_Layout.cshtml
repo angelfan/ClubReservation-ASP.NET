@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="overview & stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>俱乐部活动预约系统</title>
+    <!-- basic styles -->
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/bootstrap-responsive.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/font-awesome.min.css")" rel="stylesheet" />
+    <!-- page specific plugin styles -->
+    <link href="@Url.Content("~/Content/css/jquery-ui-1.10.2.custom.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/jquery.gritter.css")" rel="stylesheet" />
+    <!-- ace styles -->
+    <link href="@Url.Content("~/Content/css/ace.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/ace-responsive.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/css/ace-skins.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/pagecss/style.css")" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+</head>
+<body onload="bodyLoad()">
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="brand" href="#"><small><i class="icon-leaf"></i>&nbsp;&nbsp;俱乐部活动预约系统</small> </a>
+                <!--/登陆信息-->
+                <ul class="nav ace-nav pull-right">
+                    @Html.Partial("~/Views/Shared/_LoginPartial.cshtml")
+                </ul>
+                <!--/.ace-nav-->
+            </div><!--/.container-fluid-->
+        </div><!--/.navbar-inner-->
+    </div><!--/.navbar-->
+    <div class="container-fluid" id="main-container">
+        <a href="#" id="menu-toggler"><span></span></a><!-- menu toggler -->
+        <div id="sidebar">
+            @Html.Partial("~/Views/Shared/_LayoutMenu.cshtml")
+        </div><!--/#sidebar-->
+
+        <div id="main-content" class="clearfix">
+            <div id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home"></i> <a href="@Url.Action("Home","User")>主页</a><span class="divider"><i class="icon-angle-right"></i></span></li>
+                    <li id="bread" class="active"></li>
+                </ul><!--.breadcrumb-->
+            </div><!--#breadcrumbs-->
+            <section id="page-content" class="content-wrapper main-content clear-fix">
+                @RenderSection("featured", required: false)
+                @RenderBody()
+            </section><!-- #main-content -->
+        </div><!--/.fluid-container#main-container-->
+    </div>
+    <!-- basic scripts -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="@Url.Content("~/Scripts/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/bootbox.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/bootstrap.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/js/jquery-ui-1.10.2.custom.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery.ui.touch-punch.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery.easy-pie-chart.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery.sparkline.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/js/ace-elements.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/ace.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/jquery.dataTables.bootstrap.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/mycommon.js")"></script>@*根据控制器和方法名改变breadcrume地址值*@
+
+    <!-- 引用pagejs -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

@@ -1,0 +1,66 @@
+﻿@using ClubReservation.Helpers
+@{
+    ViewBag.Title = "用户参与活动情况一览";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    PageHelper ph = new PageHelper();
+}
+@section styles{
+    <link href="@Url.Content("~/Content/pagecss/statistics.css")" rel="stylesheet" />
+}
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/pagejs/statistics.js")"></script>
+}
+<div class="page-header position-relative">
+    <h1>数据统计<small><i class="icon-double-angle-right"></i> 用户参与活动情况一览</small></h1>
+</div><!--/page-header-->
+<div class="row-fluid">
+    <div class="table-header">
+        <i class="icon-coffee"></i>&nbsp;&nbsp;用户参与活动情况一览
+    </div>
+    <table id="table_users" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class='center num'>序号</th>
+                <th class="employeeCode">工号</th>
+                <th class="name">姓名</th>
+                <th class="sex">性别</th>
+                <th class="clubcount">加入俱乐部数</th>
+                <th class="activitycount">参加活动次数</th>
+                <th class="percent">参加比率</th>
+                <th class="center opertae">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 1;}
+            @foreach (var item in ViewBag.Users)
+            {
+                <tr>
+                    <td>@(i++)</td>
+                    <td>@(item.EmployeeCode)</td>
+                    <td>@(item.Name)</td>
+                    <td>
+                        @if (item.Sex == 0)
+                        {
+                            <text>男</text>
+                        }
+                        else if (item.Sex == 1)
+                        {
+                            <text>女</text>
+                        }
+                    </td>
+                <td>@(item.ClubUsers.Count)</td>
+                <td>@(item.UserActivities.Count)</td>
+                <td>@(ph.GetUserActivityPercent(item))</td>
+                <td class="center">
+                    <a href="@Url.Action("UserDetails", new { id = item.Id })" class="tooltip-warning" data-rel="tooltip"
+                       title="详细" data-placement="left"><span class="blue"><i class="icon-user-md"></i></span>详细</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="ace-settings-container">
+    <!--#breadcrumbs皮肤的设置-->
+    @Html.Partial("~/Views/Shared/_PageSkin.cshtml")
+</div><!--/#ace-settings-container-->

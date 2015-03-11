@@ -1,0 +1,62 @@
+﻿/*----------俱乐部一览----------*/
+#table_club .num {
+    width: 5%;
+}
+#table_club .clubname {
+    width: 15%;
+}
+#table_club .clubinfo {
+    width: 35%;
+}
+#table_club .email {
+    width: 15%;
+}
+#table_club .number {
+    width: 10%;
+}
+#table_club .createdate {
+    width: 10%;
+}
+#table_club .opertae {
+    width: 10%;
+}
+
+/*----------用户审核一览----------*/
+#table_examine .num {
+    width: 5%;
+}
+#table_examine .employeeCode {
+    width: 15%;
+}
+#table_examine .name {
+    width: 15%;
+}
+#table_examine .email {
+    width: 25%;
+}
+#table_examine .createdate {
+    width: 25%;
+}
+#table_examine .opertae {
+    width: 15%;
+}
+/*----------资产一览----------*/
+#table_property .num {
+    width: 5%;
+}
+#table_property .name {
+    width: 35%;
+}
+#table_property .count {
+    width: 15%;
+}
+#table_property .price {
+    width: 15%;
+}
+#table_property .updatedate {
+    width: 15%;
+}
+#table_property .opertae {
+    width: 15%;
+}
+

@@ -1,0 +1,25 @@
+﻿/*-----用户统计-----*/
+#table_report .num{
+    width:5%;
+}
+#table_report .employeeCode{
+    width:15%;
+}
+#table_report .name{
+    width:15%;
+}
+#table_report .sex{
+    width:10%;
+}
+#table_report .email{
+    width:20%;
+}
+#table_report .team{
+    width:15%;
+}
+#table_report .tel{
+    width:10%;
+}
+#table_report .opertae{
+    width:10%;
+}

@@ -1,0 +1,10 @@
+﻿.field-validation-error{
+    color:red;
+    font-weight:bold;
+    font-size:13px;
+}
+.field-validation-valid{
+    color:red;
+    font-weight:bold;
+    font-size:13px;
+}

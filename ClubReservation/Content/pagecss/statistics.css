@@ -1,0 +1,94 @@
+﻿/*-----用户统计-----*/
+#table_users .num{
+    width:5%;
+}
+#table_users .employeeCode{
+    width:15%;
+}
+#table_users .name{
+    width:15%;
+}
+#table_users .sex{
+    width:15%;
+}
+#table_users .clubcount{
+    width:15%;
+}
+#table_users .activitycount{
+    width:15%;
+}
+#table_users .percent{
+    width:10%;
+}
+#table_users .opertae{
+    width:10%;
+}
+/*-----用户详细统计-----*/
+#table_user_details .num{
+    width:5%;
+}
+#table_user_details .name{
+    width:15%;
+}
+#table_user_details .place{
+    width:30%;
+}
+#table_user_details .start{
+    width:10%;
+}
+#table_user_details .end{
+    width:10%;
+}
+#table_user_details .enrollNo{
+    width:10%;
+}
+#table_user_details .maxNumber{
+    width:10%;
+}
+#table_user_details .percent{
+    width:10%;
+}
+/*-----俱乐部统计-----*/
+#table_clubs .num{
+    width:5%;
+}
+#table_clubs .name{
+    width:35%;
+}
+#table_clubs .number{
+    width:15%;
+}
+#table_clubs .count{
+    width:15%;
+}
+#table_clubs .percent{
+    width:15%;
+}
+#table_clubs .opertae{
+    width:15%;
+}
+/*-----俱乐部详细统计-----*/
+#table_club_details .num{
+    width:5%;
+}
+#table_club_details .name{
+    width:15%;
+}
+#table_club_details .place{
+    width:30%;
+}
+#table_club_details .start{
+    width:10%;
+}
+#table_club_details .end{
+    width:10%;
+}
+#table_club_details .enrollNo{
+    width:10%;
+}
+#table_club_details .maxNumber{
+    width:10%;
+}
+#table_club_details .percent{
+    width:10%;
+}

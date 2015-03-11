@@ -1,0 +1,171 @@
+﻿@model ClubReservation.Models.Activity
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-header position-relative">
+    <h1>活动管理<small><i class="icon-double-angle-right"></i> 活动详细</small></h1>
+</div><!--/page-header-->
+<!--/显示提示信息-->
+@if (TempData["messages"] != null)
+{
+    <div id="messageBoxOk" class="alert alert-block alert-success">
+        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+        <i class="icon-ok green"></i>
+        <span>@TempData["messages"]</span>
+    </div>
+}
+
+<form id="activityFrom" class="form-horizontal">
+
+    <div class="control-group">
+        <label class="control-label">
+            @Html.DisplayNameFor(model => model.ClubId)
+        </label>
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.Club.ClubName, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">
+            @Html.LabelFor(model => model.ActivityName, new { @class = "control-label" })
+        </label>
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.ActivityName, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.ActivityPlace, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.ActivityPlace, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.StartTime, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.StartTime, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.EndTime, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.EndTime, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.EnrollEndTime, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.EnrollEndTime, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.MinNumber, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.MinNumber, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.MaxNumber, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.MaxNumber, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.EnrollNo, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.EnrollNo, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">创建者</label>
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.User.Name, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">创建时间</label>
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.CreateDate, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">更新者</label>
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.UpdateUser.Name, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">更新时间</label>
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.UpdateDate, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.ActivityInfo, new { @class = "control-label" })
+        <div class="controls">
+            @Html.TextAreaFor(model => model.ActivityInfo, new { @readonly = "readonly", style = "width:400px", rows = "7" })
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-info btn-small"><i class="icon-edit"></i> 编辑</a>
+        &nbsp; &nbsp;
+        <a href="@Url.Action("Index")" class="btn btn-purple btn-small"><i class="icon-arrow-left"></i> 返回</a>
+    </div>
+    <div class="hr"></div>
+</form>
+<!-- 皮肤设置-->
+<div id="ace-settings-container">
+    <!--#breadcrumbs皮肤的设置-->
+    @Html.Partial("~/Views/Shared/_PageSkin.cshtml")
+</div>

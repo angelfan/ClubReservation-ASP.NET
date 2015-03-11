@@ -1,0 +1,68 @@
+﻿@model ClubReservation.Models.User
+@using ClubReservation.Models
+@using ClubReservation.Helpers
+<table id="club-table" class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th style="width:40%">俱乐部</th>
+            <th style="width:20%">是否参加</th>
+            <th style="width:40%">角色</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Clubs != null)
+        {
+            User user = new CurrentUser().User;
+            string disable = (user.RoleId == MasterData.RoleSA) ? "" : "disabled";
+            foreach (Club c in ViewBag.Clubs)
+            {
+                var ucus = Model.ClubUsers;
+                var ucu = (ucus == null) ? null : (ucus.FirstOrDefault(u => u.ClubId == c.Id));
+                if (ucu != null)
+                {
+                    <tr>
+                        <td>@c.ClubName</td>
+                        <td>
+                            <select onchange="valMaxClub()" class="join" name="join_@c.Id" style="width:80px;">
+                                <option value="0">否</option>
+                                <option value="1" selected="selected">是</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="role" name="role_@c.Id" style="width:120px;" @(disable)>
+                                @if (ucu.RoleId == MasterData.RoleAU)
+                                {
+                                    <option value="@MasterData.RoleAU" selected="selected">普通用户</option>
+                                    <option value="@MasterData.RoleCM">管理员</option>
+                                }
+                                else
+                                {
+                                    <option value="@MasterData.RoleAU">普通用户</option>
+                                    <option value="@MasterData.RoleCM" selected="selected">管理员</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@c.ClubName</td>
+                        <td>
+                            <select onchange="valMaxClub()" class="join" name="join_@c.Id" style="width:80px;">
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="role" name="role_@c.Id" style="width:120px;" @(disable)>
+                                <option value="@MasterData.RoleAU">普通用户</option>
+                                <option value="@MasterData.RoleCM">管理员</option>
+                            </select>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,73 @@
+﻿@model ClubReservation.Models.Property
+@{
+    ViewBag.Title = "俱乐部资产详细";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var club = ViewBag.Club;
+}
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/pagejs/club.js")"></script>
+}
+
+<div class="page-header position-relative">
+    <h1>俱乐部管理<small><i class="icon-double-angle-right"></i>@(club.ClubName)&nbsp;&nbsp;俱乐部资产详细</small></h1>
+</div><!--/page-header-->
+<div class="row-fluid">
+    @if (TempData["Success"] != null)
+    {
+
+        <div class="alert alert-block alert-message alert-success">
+            <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+            <span>
+                <i class="icon-ok green"></i>
+                @TempData["Success"]
+            </span>
+        </div>
+    }
+</div>
+<div class="row-fluid">
+    <!-- 表单开始-->
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "propertyFrom", @class = "form-horizontal" }))
+    {
+        <div class="control-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+            <div class="controls">
+                <span class="input-icon">
+                    @Html.TextBoxFor(model => model.Name, new { @readonly = "readonly" })
+                    <i class="icon-leaf"></i>
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Count, new { @class = "control-label" })
+            <div class="controls">
+                <span class="input-icon">
+                    @Html.TextBoxFor(model => model.Count, new { @readonly = "readonly" })
+                    <i class="icon-leaf"></i>
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Price, new { @class = "control-label" })
+            <div class="controls">
+                <span class="input-icon">
+                    @Html.TextBoxFor(model => model.Price, new { @readonly = "readonly" })
+                    <i class="icon-leaf"></i>
+                </span>
+            </div>
+        </div>
+        <div class="form-actions">
+            <a href="@Url.Action("PropertyEdit","Club", new { id=Model.Id })" class="btn btn-info btn-small"><i class="icon-edit"></i> 编辑</a>
+            &nbsp; &nbsp;
+            <a href="@Url.Action("Property", "Club", new { id = Model.ClubId })" class="btn btn-small btn-purple"><i class="icon-arrow-left"></i> 返回</a>
+        </div>
+        <div class="hr"></div>
+    }
+    <div class="space-24ger"></div>
+    <!-- PAGE CONTENT ENDS HERE -->
+</div><!--/row-->
+
+<div id="ace-settings-container">
+    <!--#breadcrumbs皮肤的设置-->
+    @Html.Partial("~/Views/Shared/_PageSkin.cshtml")
+</div><!--/#ace-settings-container-->

@@ -1,0 +1,26 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>系统错误</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h3>系统错误&nbsp;&nbsp;&nbsp;<small>点击<a href="@Url.Action("Login","User")">返回</a>登录页面</small></h3>
+        </div>
+        <div class="well" style="color:red">
+            <h4>@Model.Exception.Message</h4>
+            <p> <strong>源：</strong> @(Model.ControllerName+"/"+Model.ActionName)</p>
+        </div>
+    </div>
+    <script src="@Url.Content("~/Scripts/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/bootstrap.min.js")"></script>
+</body>
+</html>

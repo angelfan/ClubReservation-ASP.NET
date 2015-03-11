@@ -1,0 +1,43 @@
+﻿@using ClubReservation.Models
+@{ int n = 1; }
+@{
+    foreach (UserActivity c in ViewBag.userActivities)
+    {
+        if (c.Activity.State == 0)
+        {
+            <tr>
+                <td class='center'>@(n++)</td>
+                <td><a href="@Url.Action("Details","Activity", new { id = @c.Activity.Id })">@c.Activity.ActivityName</a></td>
+                <td>@c.Activity.ActivityPlace</td>
+                <td>@c.Activity.StartTime</td>
+                <td>@c.Activity.EndTime</td>
+                <td><a href="@Url.Action("Details","Club", new { id = @c.Activity.ClubId })">@c.Activity.Club.ClubName</a></td>
+                <td>@c.Activity.MinNumber</td>
+                <td>@c.Activity.MaxNumber</td>
+                <td>@c.Activity.EnrollNo</td>
+                <td class="center">
+                    @{
+                        if(@c.Activity.EnrollEndTime > @ViewBag.TimeNow )
+                        {
+                            <button id="bootbox-confirm" class='btn btn-mini btn-danger' data-href="/UserZone/CancelEnroll/@c.Id" data-value="@c.Id"><i class='icon-exclamation-sign'></i>&nbsp;取消报名</button>
+                        }
+                        else if (@c.Activity.StartTime > @ViewBag.TimeNow)
+                        {
+                            <button class='btn btn-mini btn-warning'><i class='icon-fire'></i>&nbsp;即将开始</button>
+                        }
+                        else if (@c.Activity.StartTime < @ViewBag.TimeNow && @c.Activity.EndTime > @ViewBag.TimeNow)
+                        {
+                            <button class='btn btn-mini btn-pink'><i class='icon-heart'></i>&nbsp;正在进行</button>
+                        }
+                        else if ( @c.Activity.EndTime < @ViewBag.TimeNow)
+                        {
+                            <button class='btn btn-mini btn-gray'><i class='icon-ban-circle'></i>&nbsp;活动结束</button>
+                        }
+                    }          
+                </td>
+            </tr>
+        }
+    }
+}
+
+

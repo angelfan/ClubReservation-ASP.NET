@@ -1,0 +1,194 @@
+﻿@model ClubReservation.Models.Activity
+@section styles {
+    <!--/日期控件样式-->
+    <link href="@Url.Content("~/Content/css/bootstrap-datetimepicker.min.css")" rel="stylesheet" />
+}
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-header position-relative">
+    <h1>活动管理<small><i class="icon-double-angle-right"></i> 活动编辑</small></h1>
+</div><!--/page-header-->
+@if (TempData["messages"] != null)
+{
+    <div id="messageBoxOk" class="alert alert-block alert-erroe">
+        <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+        <i class="icon-remove red"></i>
+        <span>@TempData["messages"]</span>
+    </div>
+}
+@using (Html.BeginForm("Edit", "Activity", FormMethod.Post, new { id = "activityFrom", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="control-group">
+        <label class="control-label">
+            @Html.LabelFor(model => model.Club.ClubName)
+        </label>
+        <div class="controls">
+            <span class="input-icon">
+                <input type="text" value="@Model.Club.ClubName" readonly />
+                @Html.HiddenFor(model => model.ClubId)
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">
+            @Html.LabelFor(model => model.User.Name)
+        </label>
+        <div class="controls">
+            <span class="input-icon">
+                <input type="text" value="@Model.User.Name" readonly />
+                @Html.HiddenFor(model => model.UserId)
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">
+            @Html.LabelFor(model => model.ActivityName)
+        </label>
+        <div class="controls">
+            <span class="input-icon">
+                @Html.EditorFor(model => model.ActivityName)
+                @Html.ValidationMessageFor(model => model.ActivityName)
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.ActivityPlace, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.EditorFor(model => model.ActivityPlace)
+                @Html.ValidationMessageFor(model => model.ActivityPlace)
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+    DateTime st = Model.StartTime;
+    DateTime et = Model.EndTime;
+    DateTime ert = Model.EnrollEndTime;
+    string s1 = (st == null) ? null : st.ToString("yyyy-MM-dd hh:mm");
+    string s2 = (et == null) ? null : et.ToString("yyyy-MM-dd hh:mm");
+    string s3 = (ert == null) ? null : ert.ToString("yyyy-MM-dd hh:mm");
+    <div class="control-group">
+            @Html.LabelFor(model => model.StartTime, new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-append">
+                    <input class="input-validation-error datetimepicker" data-val="true"
+                           data-val-required="请输入活动开始时间" id="StartTime" name="StartTime" value="@(s1)" type="text">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                    @Html.ValidationMessageFor(model => model.StartTime)
+                </div>
+        </div>
+
+    <div class="control-group">
+            @Html.LabelFor(model => model.EndTime, new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-append">
+                    <input class="input-validation-error datetimepicker" data-val="true"
+                           data-val-required="请输入活动结束时间" id="EndTime" name="EndTime" value="@(s2)" type="text">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                @Html.ValidationMessageFor(model => model.EndTime)
+                <span id="sEndTime" class="red"></span>
+            </div>
+        </div>
+
+     <div class="control-group">
+            @Html.LabelFor(model => model.EnrollEndTime, new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-append">
+                    <input class="input-validation-error datetimepicker" data-val="true"
+                           data-val-required="请输入活动截止时间" id="EnrollEndTime" name="EnrollEndTime" value="@(s3)" type="text">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+                @Html.ValidationMessageFor(model => model.EnrollEndTime)
+                <span id="sEnrollEndTime" class="red"></span>
+            </div>
+        </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.MinNumber, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.EditorFor(model => model.MinNumber)
+                @Html.ValidationMessageFor(model => model.MinNumber)
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.MaxNumber, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.EditorFor(model => model.MaxNumber)
+                @Html.ValidationMessageFor(model => model.MaxNumber)
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.EnrollNo, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.EnrollNo, new { @readonly = "readonly" })
+                <i class="icon-leaf"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        @Html.LabelFor(model => model.ActivityInfo, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextAreaFor(model => model.ActivityInfo, new { style = "width:400px", rows = "7" })
+                @Html.ValidationMessageFor(model => model.ActivityInfo)
+            </span>
+        </div>
+    </div>
+
+
+    <div class="control-group hide">
+        @*隐藏创建时间  否则 该时间 被初始化*@
+        @Html.LabelFor(model => model.CreateDate, new { @class = "control-label" })
+        <div class="controls">
+            <span class="input-icon">
+                @Html.TextBoxFor(model => model.CreateDate, new { @readonly = "readonly" })
+            </span>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button class="btn btn-info btn-small" type="submit"><i class="icon-ok"></i> 提交</button>
+        &nbsp; &nbsp;
+        <button class="btn btn-small" type="reset"><i class="icon-undo"></i> 重置</button>
+        &nbsp; &nbsp;
+        <a href="@Url.Action("Index")" class="btn btn-purple btn-small"><i class="icon-arrow-left"></i> 返回</a>
+    </div>
+    <div class="hr"></div>
+
+}
+<!-- 皮肤设置-->
+<div id="ace-settings-container">
+    <!--#breadcrumbs皮肤的设置-->
+    @Html.Partial("~/Views/Shared/_PageSkin.cshtml")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/pagejs/activity.js")"></script>
+    <!--/日期控件js-->
+    <script src="@Url.Content("~/Scripts/js/bootstrap-datetimepicker.js")"></script>
+    <script src="@Url.Content("~/Scripts/js/bootstrap-datetimepicker.zh-CN.js")"></script>
+}
